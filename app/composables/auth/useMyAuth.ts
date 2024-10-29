@@ -2,6 +2,7 @@ import type { AuthUser } from "@/interfaces/auth"
 
 export const useMyAuth = () => {
   const { authUser, setAuthUser } = useAuthUser()
+  const { setAlertMsg } = useAlertMsg()
 
   const {
     data: user,
@@ -17,9 +18,16 @@ export const useMyAuth = () => {
     await execute()
 
     if (getMeError.value) {
-      console.error(getMeError.value.message)
       setAuthUser(null)
+
+      setAlertMsg({
+        level: "error",
+        title: "Unauthorized Error",
+        description: getMeError.value.statusMessage,
+      })
+
       await navigateTo("/login")
+
       return
     }
 

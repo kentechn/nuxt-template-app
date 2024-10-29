@@ -56,5 +56,10 @@ const isValid = defineModel("isFieldDirty", {
   </FormField>
 </template>
 
-<style>
+<style scoped>
+/* デフォルトの目のアイコンを非表示にする */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
 </style>

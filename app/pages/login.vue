@@ -1,12 +1,25 @@
 <script lang="ts" setup>
+const { clearAlertMsg } = useAlertMsg()
+
+// clear alert message when unmount
+onBeforeUnmount(() => {
+  clearAlertMsg()
+})
 </script>
 
 <template>
-  <div class="pt-6">
-    <h1 class="text-2xl mb-3">
-      Login Page
-    </h1>
-    <AuthLoginForm />
+  <div class="flex justify-center mt-12">
+    <Card class="w-[600px]">
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <Alert />
+      </CardHeader>
+      <CardContent>
+        <ClientOnly>
+          <AuthLoginForm />
+        </ClientOnly>
+      </CardContent>
+    </Card>
   </div>
 </template>
 
