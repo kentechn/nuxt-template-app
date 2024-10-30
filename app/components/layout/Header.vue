@@ -21,9 +21,14 @@ const { logout } = useMyAuth()
         >
           Home
         </NuxtLink>
+        <NuxtLink
+          to="/protect"
+          class="text-gray-100 hover:text-gray-400"
+        >
+          Protect
+        </NuxtLink>
         <template v-if="isAuthenticated">
           <NuxtLink
-            to="/login"
             class="text-gray-100 hover:text-gray-400"
             :onclick="logout"
           >

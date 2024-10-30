@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ExclamationTriangleIcon, CrossCircledIcon } from "@radix-icons/vue"
-import { Alert, AlertDescription, AlertTitle } from "@/components/shadcn/alert"
+import { Alert as ShadcnAlert } from "@/components/shadcn/alert"
 
 const { alertMsg, clearAlertMsg } = useAlertMsg()
 
@@ -10,7 +10,7 @@ const variant = computed(() =>
 </script>
 
 <template>
-  <Alert
+  <ShadcnAlert
     v-if="alertMsg"
     :variant="variant"
   >
@@ -31,5 +31,5 @@ const variant = computed(() =>
     <AlertDescription v-if="alertMsg.description">
       {{ alertMsg.description }}
     </AlertDescription>
-  </Alert>
+  </ShadcnAlert>
 </template>

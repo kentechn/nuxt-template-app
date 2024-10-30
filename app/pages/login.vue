@@ -11,7 +11,9 @@ onBeforeUnmount(() => {
   <div class="flex justify-center mt-12">
     <Card class="w-[600px]">
       <CardHeader>
-        <CardTitle>Login</CardTitle>
+        <CardTitle class="mb-3">
+          Login
+        </CardTitle>
         <Alert />
       </CardHeader>
       <CardContent>

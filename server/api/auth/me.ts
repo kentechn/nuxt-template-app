@@ -1,24 +1,31 @@
-import type { AuthUser } from "~/interfaces/auth"
+import { FAKE_DB_USER } from "./login.post"
+import { verifyJWT } from "~~/server/libs/jwt"
 
 export default defineEventHandler(async (event) => {
-  console.log("event.context.user:")
-  console.log(event.context.user)
+  const token = getCookie(event, "token")
 
-  const username: string = event.context.user.username ?? ""
+  const authError = createError({
+    statusCode: 401,
+    statusMessage: "Unauthorized, please login again",
+  })
 
-  if (!username) {
-    throw createError({
-      statusCode: 401,
-      message: "Unauthorized",
-    })
+  if (!token) {
+    throw authError
   }
 
-  const user: AuthUser = {
-    id: "12345",
-    username,
-    email: "test@test.com",
-    isAdmin: true,
+  // verify JWT
+  try {
+    verifyJWT(token)
+  }
+  catch (e) {
+    console.error(e)
+    throw authError
   }
 
-  return user
+  return {
+    id: FAKE_DB_USER.id,
+    username: FAKE_DB_USER.username,
+    email: FAKE_DB_USER.email,
+    isAdmin: FAKE_DB_USER.isAdmin,
+  }
 })
